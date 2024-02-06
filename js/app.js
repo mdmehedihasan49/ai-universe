@@ -4,7 +4,7 @@ fetch (url)
 .then(data => displayItems (data.data.tools));
 
 const displayItems = items => {
-    // console.log(items)
+    console.log(items)
     const itemsContainer = document.getElementById('items-container');
     items.forEach(item => {
        const itemsDiv = document.createElement('div'); 
@@ -13,12 +13,18 @@ const displayItems = items => {
        <div class="card h-100">
        <img src="${item.image}" class="card-img-top" alt="...">
        <div class="card-body">
-         <h5 class="card-title">Card title</h5>
-         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+         <h5 class="card-title"><strong>Features</strong></h5>
+         <p class="card-text">${item.features[0]}</p>
+         <p class="card-text">${item.features[1]}</p>
+         <p class="card-text">${item.features[2]}</p>
        </div>
        <div class="card-footer">
-         <small class="text-body-secondary">Last updated 3 mins ago</small>
-       </div>
+         <h4><strong>${item.name}</strong><h4>
+         <div class="d-flex justify-content-between">
+         <p><small> 11/01/2022 </small></p>
+         <div class="d-flex align-items-center btn btn-outline-danger border border-danger-subtle rounded-circle"><i class= " fa-solid fa-arrow-right"></i> <div>
+         </div>
+         </div>
      </div>
        `;
         itemsContainer.appendChild(itemsDiv);
