@@ -1,12 +1,15 @@
-const url = `https://openapi.programming-hero.com/api/ai/tools`;
-fetch (url)
-.then(res => res.json())
-.then(data => displayItems (data.data.tools));
+const loadItems = async () =>{
+  const url = `https://openapi.programming-hero.com/api/ai/tools`;
+  const res = await fetch (url)
+  const data = await res.json()
+  displayItems (data.data.tools)
+
+};
 
 const displayItems = items => {
-    console.log(items)
     const itemsContainer = document.getElementById('items-container');
     items.forEach(item => {
+      console.log(item)
        const itemsDiv = document.createElement('div'); 
        itemsDiv.classList.add('col');
        itemsDiv.innerHTML= `
@@ -18,15 +21,27 @@ const displayItems = items => {
          <p class="card-text">${item.features[1]}</p>
          <p class="card-text">${item.features[2]}</p>
        </div>
-       <div class="card-footer">
+      <div class="card-footer">
          <h4><strong>${item.name}</strong><h4>
          <div class="d-flex justify-content-between">
          <p><small> 11/01/2022 </small></p>
-         <div class="d-flex align-items-center btn btn-outline-danger border border-danger-subtle rounded-circle"><i class= " fa-solid fa-arrow-right"></i> <div>
+            <div onclick="showModal('${item.id}')"class="d-flex align-items-center btn btn-outline-danger border border-danger-subtle rounded-circle"><i class= " fa-solid fa-arrow-right"></i> <div>
          </div>
-         </div>
+      </div>
      </div>
        `;
         itemsContainer.appendChild(itemsDiv);
     });
+};
+
+const showModal =async (id) => {
+  console.log(id)
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
+  const res =await fetch (url)
+  const data = await res.json()
+  console.log(data);
 }
+
+// const passModal = data =>{
+// console.log(data)
+// } 
